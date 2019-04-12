@@ -15,8 +15,21 @@ after_success:
   - docker build -t yaf20030918/multi-worker worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  
+
   - docker push yaf20030918/multi-client
   - docker push yaf20030918/multi-nginx
   - docker push yaf20030918/multi-server
   - docker push yaf20030918/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: ap-northeast-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-ap-northeast-1-633074510395
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
