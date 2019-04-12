@@ -24,7 +24,7 @@
     },
     {
       "name": "nginx",
-      "image": "yaf20030918/nginx",
+      "image": "yaf20030918/multi-nginx",
       "essential": true,
       "portMappings": [
         {
